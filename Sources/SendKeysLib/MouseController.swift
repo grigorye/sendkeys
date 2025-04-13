@@ -67,13 +67,13 @@ class MouseController {
             mouseEventSource: nil, mouseType: downMouseType, mouseCursorPosition: resolvedLocation, mouseButton: button)
         downEvent?.setIntegerValueField(.mouseEventClickState, value: Int64(clickCount))
         downEvent?.flags = flags
-        downEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+        downEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
         let eventSource = CGEventSource(event: downEvent)
 
         let upEvent = CGEvent(
             mouseEventSource: eventSource, mouseType: upMouseType, mouseCursorPosition: resolvedLocation,
             mouseButton: button)
-        upEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+        upEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
     }
 
     func down(_ location: CGPoint?, button: CGMouseButton, flags: CGEventFlags) {
@@ -83,7 +83,7 @@ class MouseController {
         let downEvent = CGEvent(
             mouseEventSource: nil, mouseType: downMouseType, mouseCursorPosition: resolvedLocation, mouseButton: button)
         downEvent?.flags = flags
-        downEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+        downEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
 
         downButtons.insert(button)
     }
@@ -95,7 +95,7 @@ class MouseController {
         let upEvent = CGEvent(
             mouseEventSource: nil, mouseType: upMouseType, mouseCursorPosition: resolvedLocation,
             mouseButton: button)
-        upEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+        upEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
         downButtons.remove(button)
     }
 
@@ -118,7 +118,7 @@ class MouseController {
                 mouseEventSource: nil, mouseType: downMouseType, mouseCursorPosition: resolvedStart, mouseButton: button
             )
             downEvent?.flags = flags
-            downEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+            downEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
             eventSource = CGEventSource(event: downEvent)
         }
 
@@ -127,7 +127,7 @@ class MouseController {
         if !downButtons.contains(button) {
             let upEvent = CGEvent(
                 mouseEventSource: eventSource, mouseType: upMouseType, mouseCursorPosition: end, mouseButton: button)
-            upEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+            upEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
         }
     }
 
@@ -188,7 +188,7 @@ class MouseController {
             event?.setIntegerValueField(field, value: Int64(amount * -1))
             event?.flags = flags
 
-            event?.post(tap: CGEventTapLocation.cghidEventTap)
+            event?.post(tap: CGEventTapLocation.cgSessionEventTap)
         } else {
             fatalError("Scrolling is only available on 10.13 or later\n")
         }
@@ -207,7 +207,7 @@ class MouseController {
             mouseEventSource: eventSource, mouseType: moveType, mouseCursorPosition: location,
             mouseButton: button ?? CGMouseButton.left)
         moveEvent?.flags = flags
-        moveEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+        moveEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
     }
 
     private func getEventType(_ mouseType: mouseEventType, _ button: CGMouseButton? = nil) -> CGEventType {

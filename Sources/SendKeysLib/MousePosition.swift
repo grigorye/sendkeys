@@ -113,7 +113,7 @@ class MousePosition: ParsableCommand {
 
         guard
             let eventTap = CGEvent.tapCreate(
-                tap: .cghidEventTap, place: .tailAppendEventTap, options: .defaultTap,
+                tap: .cgSessionEventTap, place: .tailAppendEventTap, options: .defaultTap,
                 eventsOfInterest: CGEventMask(eventMask),
                 callback: {
                     (proxy: CGEventTapProxy, eventType: CGEventType, event: CGEvent, refcon: UnsafeMutableRawPointer?)

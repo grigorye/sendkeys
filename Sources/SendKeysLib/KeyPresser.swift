@@ -21,12 +21,12 @@ public class KeyPresser {
         let keyDownEvent = try! createKeyEvent(key: key, modifiers: modifiers, keyDown: true)
 
         if self.application == nil {
-            keyDownEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+            keyDownEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
         } else {
             if #available(OSX 10.11, *) {
                 keyDownEvent?.postToPid(self.application!.processIdentifier)
             } else {
-                keyDownEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+                keyDownEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
             }
         }
 
@@ -37,12 +37,12 @@ public class KeyPresser {
         let keyUpEvent = try! createKeyEvent(key: key, modifiers: modifiers, keyDown: false)
 
         if self.application == nil {
-            keyUpEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+            keyUpEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
         } else {
             if #available(OSX 10.11, *) {
                 keyUpEvent?.postToPid(self.application!.processIdentifier)
             } else {
-                keyUpEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+                keyUpEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
             }
         }
 
@@ -54,12 +54,12 @@ public class KeyPresser {
             key: key, modifiers: modifiers, keyDown: false, parentEventSource: CGEventSource(event: event))
 
         if self.application == nil {
-            keyUpEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+            keyUpEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
         } else {
             if #available(OSX 10.11, *) {
                 keyUpEvent?.postToPid(self.application!.processIdentifier)
             } else {
-                keyUpEvent?.post(tap: CGEventTapLocation.cghidEventTap)
+                keyUpEvent?.post(tap: CGEventTapLocation.cgSessionEventTap)
             }
         }
 
